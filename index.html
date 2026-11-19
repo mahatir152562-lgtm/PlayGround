@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101611" />
+  <link rel="icon" href="data:," />
+  <title>LAST LIGHT — Riftfall</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <canvas id="world" aria-label="Playable Riftfall battlefield"></canvas>
+    <div class="vignette"></div><div class="film-grain"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Last Light home"><span class="brand-mark">L<span>✳</span></span><span class="brand-name">LAST<span>LIGHT</span></span></a>
+      <div class="match-label"><span class="live-dot"></span><span>RANKED&nbsp; / &nbsp;SQUADS</span><i></i><span>RIFTFALL</span></div>
+      <div class="top-right"><span class="connection"><b></b> 24 ms</span><button class="icon-btn" id="soundBtn" title="Toggle sound">♫</button><button class="icon-btn" id="pauseBtn" title="Pause">Ⅱ</button><div class="profile"><span class="profile-level">25</span><span class="profile-copy"><b>WRAITH</b><small>FIELD OPERATIVE</small></span><span class="profile-chevron">⌄</span></div></div>
+    </header>
+    <section class="match-info"><div class="round-pill"><span class="round-icon">◈</span> MATCH 04 <span class="pill-divider"></span> <b>FINAL FOUR</b></div><div class="match-stats"><span><i class="stat-icon">♙</i><b id="playersLeft">8</b><small>ALIVE</small></span><span><i class="stat-icon skull">✕</i><b id="elims">00</b><small>ELIMS</small></span><span><i class="stat-icon">◷</i><b id="matchClock">08:42</b><small>IN ZONE</small></span></div></section>
+    <aside class="squad-panel"><div class="section-heading"><span>YOUR SQUAD</span><span class="squad-count">04 <i>/ 04</i></span></div><div id="squadList"></div><div class="squad-footer"><span class="voice-dot"></span> SQUAD COMMS <b>LIVE</b></div></aside>
+    <aside class="objective-panel"><div class="objective-kicker"><span>◉</span> LIVE OBJECTIVE</div><div class="objective-title">HOLD THE<br><em>HIGH GROUND</em></div><div class="objective-copy">Secure the uplink before the ring closes.</div><div class="objective-progress"><span id="objectiveBar"></span></div><div class="objective-meta"><span>UPLINK CONTROL</span><b id="objectivePct">32%</b></div><div class="ring-count"><span class="ring-icon">◎</span><div><small>RING CLOSING IN</small><b id="ringTimer">01:24</b></div><span class="ring-stage">PHASE 03</span></div></aside>
+    <div class="zone-alert" id="zoneAlert"><span>▲</span> THE RING IS CLOSING <small>MOVE TO SAFE ZONE</small></div>
+    <div class="location"><div class="location-overline"><span></span> CURRENT SECTOR</div><div class="location-title" id="locationName">ASHEN DISTRICT</div><div class="location-sub">NORTHWEST CROSSING <span>•</span> ELEV. 42M</div></div>
+    <div class="team-alert" id="teamAlert"><span class="alert-mark">!</span><div><b>OPERATOR DOWN</b><small>Hold <kbd>E</kbd> to revive</small></div></div>
+    <div class="center-readout"><span class="compass-mark">N</span><span id="bearing">NNE&nbsp; 032°</span><span class="readout-divider"></span><span id="weather">ASHFALL&nbsp; 14°</span></div>
+    <div class="crosshair"><i></i><i></i><i></i><i></i><b></b></div>
+    <section class="bottom-hud"><div class="health-block"><div class="bar-label"><span>VITALS</span><b id="hpText">100 <i>/ 100</i></b></div><div class="health-track"><i id="healthBar"></i></div><div class="armor-track"><span>⬡</span><div><i id="armorBar"></i></div><b id="armorText">75</b></div></div><div class="ability-row"><button class="ability" id="abilityQ"><span class="ability-key">Q</span><span class="ability-icon pulse-icon">⌁</span><span class="ability-name">ECHO<br>SCAN</span><span class="cooldown" id="scanCooldown"></span></button><button class="ability" id="abilityF"><span class="ability-key">F</span><span class="ability-icon">➤</span><span class="ability-name">PHASE<br>SHIFT</span><span class="cooldown" id="dashCooldown"></span></button><button class="ability" id="abilityG"><span class="ability-key">G</span><span class="ability-icon">✚</span><span class="ability-name">FIELD<br>MED</span><span class="ability-charge">2</span></button></div><div class="weapon-block"><div class="weapon-meta"><span class="weapon-type">ASSAULT RIFLE <i>·</i> LV.25</span><span class="fire-mode">AUTO&nbsp; <b>⌄</b></span></div><div class="weapon-readout"><b id="ammoClip">30</b><span>/</span><span id="ammoReserve">120</span><div class="weapon-glyph">╲╲<b>⊙</b>╱╱</div></div><div class="weapon-name">VANDAL <span>VX-9</span></div><div class="weapon-slots"><i title="Muzzle">◉</i><i title="Optic">⌖</i><i title="Magazine">▤</i><i title="Grip">▥</i><span>EPIC</span></div></div><div class="weapon-switch"><div class="switch-key">1</div><span class="mini-weapon">╲⊙╱</span><small>VANDAL</small><div class="switch-key">2</div><span class="mini-pistol">⌁</span><small>SIDEARM</small></div></section>
+    <aside class="minimap-wrap"><div class="minimap-head"><span>SECTOR MAP</span><span class="map-coords">E7 <i>·</i> 14:32</span></div><canvas id="minimap" width="220" height="170"></canvas><div class="map-legend"><span><i class="legend-player"></i> YOU</span><span><i class="legend-ally"></i> SQUAD</span><span><i class="legend-enemy"></i> HOSTILE</span></div></aside>
+    <div class="killfeed" id="killfeed"></div><div class="hit-marker" id="hitMarker">✕</div>
+    <div class="pickup-toast" id="pickupToast"></div>
+    <div class="controls-hint"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> MOVE</span><i></i><span><kbd>SHIFT</kbd> SPRINT</span><i></i><span><kbd>CLICK</kbd> FIRE</span><i></i><span><kbd>R</kbd> RELOAD</span><i></i><span><kbd>Q</kbd> SCAN</span><i></i><span><kbd>SPACE</kbd> PING</span></div>
+    <div class="toast" id="toast"></div>
+    <div class="modal hidden" id="modal"><div class="modal-card"><span class="modal-kicker">LAST LIGHT <i>·</i> FIELD REPORT</span><div class="modal-symbol" id="modalSymbol">◈</div><h1 id="modalTitle">PAUSED</h1><p id="modalText">Take a breath, operator.</p><div class="result-stats"><span><b id="resultElims">00</b><small>ELIMS</small></span><span><b id="resultDamage">000</b><small>DAMAGE</small></span><span><b>25</b><small>LEVEL</small></span></div><button id="resumeBtn" class="primary-btn">BACK TO THE FIGHT <span>→</span></button><div class="modal-foot">A LAST LIGHT PROTOCOL <span>SEASON 04 / 2049</span></div></div></div>
+    <div class="scan-flash" id="scanFlash"></div><div class="damage-flash" id="damageFlash"></div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
